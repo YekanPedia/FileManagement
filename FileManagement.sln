@@ -3,8 +3,34 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.23107.0
 MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{1F2341D9-A039-4187-83F7-12D6BD3836CE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Console", "Console", "{9EFCE50F-78C1-4380-B4AD-B3124D84D7FC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YekanPedia.FileManagement.Proxy", "YekanPedia.FileManagement.Proxy\YekanPedia.FileManagement.Proxy.csproj", "{ACF62664-112C-4924-B185-A66E5B9D98F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YekanPedia.FileManagement.Domain", "YekanPedia.FileManagement.Domain\YekanPedia.FileManagement.Domain.csproj", "{30C5B45E-6CA3-41C2-969D-95BC51E11D4D}"
+EndProject
 Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{ACF62664-112C-4924-B185-A66E5B9D98F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ACF62664-112C-4924-B185-A66E5B9D98F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ACF62664-112C-4924-B185-A66E5B9D98F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ACF62664-112C-4924-B185-A66E5B9D98F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30C5B45E-6CA3-41C2-969D-95BC51E11D4D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30C5B45E-6CA3-41C2-969D-95BC51E11D4D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30C5B45E-6CA3-41C2-969D-95BC51E11D4D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30C5B45E-6CA3-41C2-969D-95BC51E11D4D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{ACF62664-112C-4924-B185-A66E5B9D98F3} = {9EFCE50F-78C1-4380-B4AD-B3124D84D7FC}
+		{30C5B45E-6CA3-41C2-969D-95BC51E11D4D} = {1F2341D9-A039-4187-83F7-12D6BD3836CE}
 	EndGlobalSection
 EndGlobal

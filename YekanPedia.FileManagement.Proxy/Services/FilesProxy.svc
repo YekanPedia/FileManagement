@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="YekanPedia.FileManagement.Proxy.Services.FilesProxy" CodeBehind="FilesProxy.svc.cs" %>
