@@ -5,15 +5,18 @@
     using Model;
     using System.Web;
     using IO = System.IO;
+    using System.Linq;
     public class FilesProxy : IFilesProxy
     {
         public List<FileInfo> GetListFiles(string address)
         {
-            return new List<FileInfo> {
-                new FileInfo {  DirectLink="asdfdas.mp3" , Extension="mp3"},
-                new FileInfo { DirectLink = "asdfdas.docx",Extension="docx" },
-                new FileInfo {DirectLink="asdfdas.pdf",Extension="pdf" }
-            };
+            var Server = HttpContext.Current.Server;
+            var dir = new IO.DirectoryInfo(Server.MapPath($"~/Files/{address}"));
+            bool exists = IO.Directory.Exists(Server.MapPath("~/Files/" + address));
+            if (!exists)
+                IO.Directory.CreateDirectory(Server.MapPath("~/Files/" + address));
+            IO.FileInfo[] files = dir.GetFiles();
+            return files.Select(X => new FileInfo { DirectLink = $"{AppSettings.HostAddress}/{address}/{X.Name}", Extension = X.Extension }).ToList();
         }
 
         public string CreateDirectory(string address)
