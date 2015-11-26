@@ -12,5 +12,8 @@
 
         [OperationContract]
         string CreateDirectory(string address);
+
+        [OperationContract]
+        long GetDirectorySize();
     }
 }
