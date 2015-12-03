@@ -6,21 +6,21 @@
 
     public class ApiController : Controller
     {
-        [HttpGet]
-        public JsonResult Remove()
+        [HttpGet, Route("Api/Remove/{day:int}")]
+        public JsonResult Remove(int day)
         {
-            var date = PersianDateTime.Now.AddDays(-8);
+            var date = PersianDateTime.Now.AddDays(-1 * day);
             var address = $"~/Files/{date.Year}/{date.Month}/{date.Day}";
             try
             {
                 var dir = new DirectoryInfo(Server.MapPath(address));
                 dir.Attributes = dir.Attributes & ~FileAttributes.ReadOnly;
                 dir.Delete(true);
-                return Json(true,JsonRequestBehavior.AllowGet);
+                return Json(true, JsonRequestBehavior.AllowGet);
             }
             catch (IOException ex)
             {
-                return Json(false, JsonRequestBehavior.AllowGet);
+                return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
     }
