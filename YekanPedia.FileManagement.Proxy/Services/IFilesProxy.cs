@@ -15,5 +15,8 @@
 
         [OperationContract]
         long GetDirectorySize();
+
+        [OperationContract]
+        string UploadImage(PostedImageFile file);
     }
 }

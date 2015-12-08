@@ -6,6 +6,8 @@
     using System.Web;
     using IO = System.IO;
     using System.Linq;
+    using Extension;
+
     public class FilesProxy : IFilesProxy
     {
         public List<FileInfo> GetListFiles(string address)
@@ -45,6 +47,30 @@
             catch (Exception)
             {
                 return 0;
+            }
+        }
+
+        public string UploadImage(PostedImageFile file)
+        {
+            try
+            {
+                var Server = HttpContext.Current.Server;
+                string address = $"UserPictures/{DateTime.Now.Year}/{DateTime.Now.Month}/";
+                string absolateAddress = Server.MapPath($"~/{address}");
+                bool exists = IO.Directory.Exists(absolateAddress);
+                if (!exists)
+                    IO.Directory.CreateDirectory(absolateAddress);
+                #region Upload File And Return the Url
+                var path = IO.Path.Combine(absolateAddress, "_" + file.FileName);
+                IO.File.WriteAllBytes(path, file.Content);
+                ImageCropper.Crop(path, IO.Path.Combine(absolateAddress, file.FileName), file.Width, file.Height, file.X, file.Y);
+                IO.File.Delete(path);
+                return $"http://Files.YekanPedia.org/PictureManager/Content/{address}{{size}}/{file.FileName.Split('.')[0]}/{file.FileName.Split('.')[1]}";
+                #endregion
+            }
+            catch (Exception)
+            {
+                return string.Empty;
             }
         }
     }
