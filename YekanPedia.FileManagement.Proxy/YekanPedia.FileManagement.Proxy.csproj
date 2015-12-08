@@ -67,6 +67,10 @@
     <Reference Include="System.Web.Services" />
     <Reference Include="System.EnterpriseServices" />
     <Reference Include="System.Xml.Linq" />
+    <Reference Include="T4MVCExtensions, Version=3.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <HintPath>..\packages\T4MVCExtensions.3.16.5\lib\net40\T4MVCExtensions.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="System.Web.Razor">
@@ -98,11 +102,19 @@
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Services\FilesProxy.svc" />
+    <None Include="T4\T4MVC.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>T4MVC.cs</LastGenOutput>
+    </None>
+    <None Include="T4\T4MVC.tt.settings.xml" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="T4\ApiController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="AppSetting.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -110,9 +122,13 @@
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\ApiController.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\PictureManagerController.cs" />
     <Compile Include="Date\PersianDateTime.cs" />
     <Compile Include="Date\TimeSpanExtension.cs" />
+    <Compile Include="T4\ErrorController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Extension\ImageCropper.cs" />
     <Compile Include="Extension\ImageManager.cs" />
     <Compile Include="Global.asax.cs">
@@ -121,16 +137,28 @@
     <Compile Include="Model\FileInfo.cs" />
     <Compile Include="Model\PostedFile.cs" />
     <Compile Include="Model\PostedImageFile.cs" />
+    <Compile Include="T4\PictureManagerController.generated.cs">
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\FilesProxy.svc.cs">
       <DependentUpon>FilesProxy.svc</DependentUpon>
     </Compile>
     <Compile Include="Services\IFilesProxy.cs" />
+    <Compile Include="T4\T4MVC.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>T4MVC.tt</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
     <Content Include="packages.config" />
+    <Content Include="Content\Fonts\BYekan\BYekan.ttf" />
     <None Include="Properties\PublishProfiles\FileManagement.pubxml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Error\NotFound.cshtml" />
+    <None Include="T4\T4MVC.tt.hooks.t4" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -141,8 +169,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Files\" />
-    <Folder Include="Views\Api\" />
-    <Folder Include="Views\PictureManager\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

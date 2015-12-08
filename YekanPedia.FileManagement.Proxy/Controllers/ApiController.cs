@@ -4,10 +4,10 @@
     using ManagementSystem.InfraStructure.Date;
     using System.IO;
 
-    public class ApiController : Controller
+    public partial class ApiController : Controller
     {
         [HttpGet, Route("Api/Remove/{day:int}")]
-        public JsonResult Remove(int day)
+        public virtual JsonResult Remove(int day)
         {
             var date = PersianDateTime.Now.AddDays(-1 * day);
             var address = $"~/Files/{date.Year}/{date.Month}/{date.Day}";
@@ -23,5 +23,5 @@
                 return Json(ex.Message, JsonRequestBehavior.AllowGet);
             }
         }
-            }
+    }
 }
