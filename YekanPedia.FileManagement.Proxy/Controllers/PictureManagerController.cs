@@ -10,7 +10,7 @@
         public virtual ActionResult Content(int year, int month, int size, string fileName, string extension)
         {
             string path = Server.MapPath($"~/UserPictures/{year}/{month}/{fileName}.{extension}");
-            if (IO.File.Exists(path))
+            if (!IO.File.Exists(path))
             {
                 return RedirectToAction(MVC.Error.NotFound());
             }

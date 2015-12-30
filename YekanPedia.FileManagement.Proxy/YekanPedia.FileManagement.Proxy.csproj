@@ -156,7 +156,6 @@
     <Content Include="packages.config" />
     <Content Include="Content\Fonts\BYekan\BYekan.ttf" />
     <None Include="Properties\PublishProfiles\FileManagement.pubxml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Error\NotFound.cshtml" />
     <None Include="T4\T4MVC.tt.hooks.t4" />
     <None Include="Web.Debug.config">
@@ -168,7 +167,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Files\" />
   </ItemGroup>
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />

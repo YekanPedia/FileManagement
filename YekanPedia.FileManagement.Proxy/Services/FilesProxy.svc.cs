@@ -49,28 +49,55 @@
                 return 0;
             }
         }
-
         public string UploadImage(PostedImageFile file)
+        {
+            var Server = HttpContext.Current.Server;
+            string address = $"UserPictures/{DateTime.Now.Year}/{DateTime.Now.Month}/";
+            string absolateAddress = Server.MapPath($"~/{address}");
+            bool exists = IO.Directory.Exists(absolateAddress);
+            if (!exists)
+                IO.Directory.CreateDirectory(absolateAddress);
+            #region Upload File And Return the Url
+            var path = IO.Path.Combine(absolateAddress, "_" + file.FileName);
+            IO.File.WriteAllBytes(path, file.Content);
+            ImageCropper.Crop(path, IO.Path.Combine(absolateAddress, file.FileName), file.Width, file.Height, file.X, file.Y);
+            IO.File.Delete(path);
+            return $"http://Files.YekanPedia.org/PictureManager/Content/{address}{{size}}/{file.FileName.Split('.')[0]}/{file.FileName.Split('.')[1]}";
+            #endregion
+        }
+        public FileInfo UploadDocument(PostedFile file)
+        {
+            var Server = HttpContext.Current.Server;
+            string address = $"DownloadFiles/FeedBack/{DateTime.Now.Year}/{DateTime.Now.Month}/";
+            string absolateAddress = Server.MapPath($"~/{address}");
+            bool exists = IO.Directory.Exists(absolateAddress);
+            if (!exists)
+                IO.Directory.CreateDirectory(absolateAddress);
+            #region Upload File And Return the Url
+            var path = IO.Path.Combine(absolateAddress, file.FileName);
+            IO.File.WriteAllBytes(path, file.Content);
+            return new FileInfo
+            {
+                DirectLink = $"http://Files.YekanPedia.org/{address}{file.FileName}",
+                Extension = IO.Path.Combine(address, file.FileName)
+            };
+            #endregion
+        }
+
+        public bool DeleteFile(string address)
         {
             try
             {
                 var Server = HttpContext.Current.Server;
-                string address = $"UserPictures/{DateTime.Now.Year}/{DateTime.Now.Month}/";
                 string absolateAddress = Server.MapPath($"~/{address}");
-                bool exists = IO.Directory.Exists(absolateAddress);
-                if (!exists)
-                    IO.Directory.CreateDirectory(absolateAddress);
-                #region Upload File And Return the Url
-                var path = IO.Path.Combine(absolateAddress, "_" + file.FileName);
-                IO.File.WriteAllBytes(path, file.Content);
-                ImageCropper.Crop(path, IO.Path.Combine(absolateAddress, file.FileName), file.Width, file.Height, file.X, file.Y);
-                IO.File.Delete(path);
-                return $"http://Files.YekanPedia.org/PictureManager/Content/{address}{{size}}/{file.FileName.Split('.')[0]}/{file.FileName.Split('.')[1]}";
-                #endregion
+                bool exists = IO.File.Exists(absolateAddress);
+                if (exists)
+                    IO.File.Delete(absolateAddress);
+                return true;
             }
-            catch (Exception)
+            catch (Exception e)
             {
-                return string.Empty;
+                return false;
             }
         }
     }

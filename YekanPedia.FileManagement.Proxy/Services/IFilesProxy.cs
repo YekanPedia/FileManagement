@@ -18,5 +18,11 @@
 
         [OperationContract]
         string UploadImage(PostedImageFile file);
+
+        [OperationContract]
+        FileInfo UploadDocument(PostedFile file);
+
+        [OperationContract]
+        bool DeleteFile(string address);
     }
 }

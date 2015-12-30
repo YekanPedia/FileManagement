@@ -5,5 +5,6 @@
         public static bool ClientValidationEnabled => bool.Parse(ConfigurationManager.AppSettings["ClientValidationEnabled"]);
         public static bool UnobtrusiveJavaScriptEnabled => bool.Parse(ConfigurationManager.AppSettings["UnobtrusiveJavaScriptEnabled"]);
         public static string HostAddress => ConfigurationManager.AppSettings["HostAddress"];
+        public static string WSAddress => ConfigurationManager.AppSettings["WSAddress"];
     }
 }
