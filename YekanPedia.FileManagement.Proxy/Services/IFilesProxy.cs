@@ -23,6 +23,9 @@
         FileInfo UploadDocument(PostedFile file);
 
         [OperationContract]
+        bool OverrideDocument(PostedFile file, string address);
+
+        [OperationContract]
         bool DeleteFile(string address);
     }
 }

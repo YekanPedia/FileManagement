@@ -84,6 +84,20 @@
             #endregion
         }
 
+        public bool OverrideDocument(PostedFile file, string address)
+        {
+            try
+            {
+                DeleteFile(address);
+                var Server = HttpContext.Current.Server;
+                IO.File.WriteAllBytes(Server.MapPath($"~/{address}"), file.Content);
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
         public bool DeleteFile(string address)
         {
             try
